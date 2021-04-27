@@ -1,21 +1,18 @@
 import React from "react";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from './componant/button/Button.jsx'
-import Cartes from "./componant/carte/Cartes";
-import Game from './componant/Play/Game.jsx'
+import Button from './componant/Button.jsx'
+import Cartes from "./views/Cartes.jsx";
+import StartGame from './views/StartGame.jsx'
 
+// tableau du jeu de cartes pré-rempli
 const cardArray = [
   "KS", "QS", "JS", "AS", "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "0S",
   "KD", "QD", "JD", "AD", "2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "0D",
   "KH", "QH", "JH", "AH", "2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "0H",
   "KC", "QC", "JC", "AC", "2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "0C"];
 
-// const min = 0
-// const cardCount = 52
 
-// let rndNum = 0
-// let temp = ""
 let arrayLength = 0
 let rndCarteTemp = "";
 let rndNumTemp = 0;
@@ -35,6 +32,8 @@ class Table extends React.Component {
     }
   }
 
+// Cette méthode fais distribuer les cartes aléatoirement (53) aux joueurs avec le Math.random
+
   rndCarte() {
     arrayLength = + this.state.playerCardList.length;
 
@@ -47,6 +46,7 @@ class Table extends React.Component {
     return rndCarteTemp
   }
 
+  // au clique sur le bouton stop => on arrête de distribuer les cartes et affiche le gagnant (Dealer ou Player)
   onClickStop = () => {
     const cardSelectedDealer = this.rndCarte()
     const cardSelectedDealer2 = this.rndCarte()
@@ -109,6 +109,8 @@ class Table extends React.Component {
     })
   }
 
+// au clique sur le bouton Give => on distribue les cartes aux joueurs
+
   onClickGive = () => {
     const cardSelected = this.rndCarte()
     const valueCarte = this.transformCardIntoInt(cardSelected.split("")[0])
@@ -149,7 +151,7 @@ class Table extends React.Component {
   render() {
     if (this.state.startGame == false) {
       return (
-        <Game startGame={this.startGame} />
+        <StartGame startGame={this.startGame} />
       )
     } else {
       return (<div>
